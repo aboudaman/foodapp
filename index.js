@@ -1,8 +1,27 @@
 const express = require('express')
+const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 const res = require('express/lib/response')
 const app = express()
 const router =  express.Router()
+
+// Setup DB
+mongoose.connect('mongodb://localhost:27017/testDB')
+
+const db = mongoose.connection
+db.on('error', () => {
+    console.log('Error Connecting')
+})
+
+db.on('open', () => {
+    console.log('Connected to DB')
+})
+
+const Cat = mongoose.model('Cat', { name: String });
+
+const kitty = new Cat({ name: 'Zildjian' });
+kitty.save().then(() => console.log('Data saved'));
+
 
 const logger = (req, res, next) => {
     req.logger = Date.now()
@@ -34,6 +53,10 @@ router.get('/login', (req, res) => {
     res.send('hello Login Page')
 })
 
+router.get('/pet/:id1/:id2', (req, res) => {
+    res.send({name: 'onetwo'})
+    console.log(req.params)
+})
 router.get('/logout', (req, res) => {
     
     res.send('hello Logout Page')
