@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const res = require("express/lib/response");
 const FoodRoutes = require("./App/Routes/FoodRoutes");
+const PersonRoutes = require("./App/Routes/PersonRoutes")
 const app = express();
 
 // Setup DB
@@ -31,7 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Load Routes
 app.use(FoodRoutes);
+app.use(PersonRoutes)
 
 app.listen(8080, () => {
   console.log("Server is running");
