@@ -35,7 +35,7 @@ const logger = (req, res, next) => {
 // console.log(path.join(__dirname,'./favicon.png'))
 // Middlewares
 // app.use(favicon(__dirname + '/favicon.png'))
-app.use(favicon(path.join(__dirname,'./favicon.png')))
+app.use(favicon(__dirname+'./favicon.png'))
 
 app.use(cors({
   origin:"*"
