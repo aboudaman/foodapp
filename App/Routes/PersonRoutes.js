@@ -1,5 +1,6 @@
 const express = require('express')
-const PersonController = require('../Controllers/PersonController')
+const path = require('path')
+const PersonController = require(path.join(__dirname,'../Controllers/PersonController'))
 const app = express()
 
 // Route to create new Person

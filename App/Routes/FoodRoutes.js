@@ -1,7 +1,11 @@
 const express = require("express");
-const FoodController = require("../Controllers/FoodControllers");
+const path = require("path");
+const FoodController = require(path.join(
+  __dirname,
+  "../Controllers/FoodControllers"
+));
 const app = express();
-const FoodModel = require("../Models/FoodModel");
+const FoodModel = require(path.join(__dirname, "../Models/FoodModel"));
 
 app.get("/foodlist", FoodController.foodList);
 

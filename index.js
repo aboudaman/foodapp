@@ -2,16 +2,24 @@ const express = require("express");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const res = require("express/lib/response");
-const FoodRoutes = require("./App/Routes/FoodRoutes");
-const PersonRoutes = require("./App/Routes/PersonRoutes")
+const path = require('path')
+const FoodRoutes = require(path.join(__dirname,"./App/Routes/FoodRoutes"));
+const PersonRoutes = require(path.join(__dirname,"./App/Routes/PersonRoutes"))
+const cors = require('cors')
 const app = express();
 
 // Setup DB
-mongoose.connect("mongodb://localhost:27017/fooddb");
+
+
+// const url = "process.env.MONGODBURL"
+mongoose.connect(process.env.MONGODB || "mongodb://localhost:27017/fooddb");
+
+// mongoose.connect("mongodb://localhost:27017/fooddb");
+// console.log(__dirname)
 
 const db = mongoose.connection;
-db.on("error", () => {
-  console.log("Error Connecting");
+db.on("error", (err) => {
+  console.log(`Error Connecting ${err}`);
 });
 
 db.on("open", () => {
@@ -23,6 +31,11 @@ const logger = (req, res, next) => {
   // console.log(`Request came ${Date.now()}`)
   next();
 };
+
+// Middlewares
+app.use(cors({
+  origin:"*"
+}))
 
 app.use(logger);
 
