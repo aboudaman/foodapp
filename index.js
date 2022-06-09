@@ -53,6 +53,6 @@ app.use(bodyParser.json());
 app.use(FoodRoutes);
 app.use(PersonRoutes)
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log("Server is running");
 });
