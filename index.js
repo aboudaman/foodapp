@@ -12,7 +12,7 @@ const app = express();
 
 
 // const url = "process.env.MONGODBURL"
-mongoose.connect(process.env.MONGODB || "mongodb://localhost:27017/fooddb");
+mongoose.connect(process.env.MONGODB ||"mongodb+srv://admin:Xe7RY2hTeWx2hrTM@cluster0.tnpbjpn.mongodb.net/fooddb?retryWrites=true&w=majority");
 
 // mongoose.connect("mongodb://localhost:27017/fooddb");
 // console.log(__dirname)
