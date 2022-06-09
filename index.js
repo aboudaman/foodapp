@@ -5,6 +5,7 @@ const res = require("express/lib/response");
 const path = require('path')
 const FoodRoutes = require(path.join(__dirname,"./App/Routes/FoodRoutes"));
 const PersonRoutes = require(path.join(__dirname,"./App/Routes/PersonRoutes"))
+const favicon = require('express-favicon');
 const cors = require('cors')
 const app = express();
 
@@ -33,6 +34,7 @@ const logger = (req, res, next) => {
 };
 
 // Middlewares
+app.use(favicon(__dirname + '/public/favicon.png'));
 app.use(cors({
   origin:"*"
 }))
