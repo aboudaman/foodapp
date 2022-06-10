@@ -5,6 +5,7 @@ const res = require("express/lib/response");
 const path = require('path')
 const FoodRoutes = require(path.join(__dirname,"./App/Routes/FoodRoutes"));
 const PersonRoutes = require(path.join(__dirname,"./App/Routes/PersonRoutes"))
+const AuthRoutes = require(path.join(__dirname,"./App/Routes/AuthRoutes"))
 const favicon = require('express-favicon');
 const cors = require('cors')
 const app = express();
@@ -51,7 +52,8 @@ app.use(bodyParser.json());
 
 // Load Routes
 app.use(FoodRoutes);
-app.use(PersonRoutes)
+app.use(PersonRoutes);
+app.use(AuthRoutes)
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("Server is running");

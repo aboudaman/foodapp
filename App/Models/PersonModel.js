@@ -1,6 +1,4 @@
 const {Schema, model} = require('mongoose')
-const path = require('path')
-const Story = require(path.join(__dirname,'./StoryModel'))
 
 const PersonSchema =  new Schema({
     _id: Schema.Types.ObjectId,
