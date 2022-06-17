@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const res = require("express/lib/response");
 const path = require('path')
-const FoodRoutes = require(path.join(__dirname,"./App/Routes/FoodRoutes"));
-const PersonRoutes = require(path.join(__dirname,"./App/Routes/PersonRoutes"))
-const AuthRoutes = require(path.join(__dirname,"./App/Routes/AuthRoutes"))
+const FoodRoutes = require(path.join(__dirname, "./App/Routes/FoodRoutes"));
+const PersonRoutes = require(path.join(__dirname, "./App/Routes/PersonRoutes"))
+const UserRoutes = require(path.join(__dirname, "./App/Routes/UserRoutes"))
 const favicon = require('express-favicon');
 const cors = require('cors')
 const app = express();
@@ -21,25 +21,25 @@ mongoose.connect(process.env.MONGODB || url);
 
 const db = mongoose.connection;
 db.on("error", (err) => {
-  console.log(`Error Connecting ${err}`);
+    console.log(`Error Connecting ${err}`);
 });
 
 db.on("open", () => {
-  console.log("Connected to DB");
+    console.log("Connected to DB");
 });
 
 const logger = (req, res, next) => {
-  req.logger = Date.now();
-  // console.log(`Request came ${Date.now()}`)
-  next();
+    req.logger = Date.now();
+    // console.log(`Request came ${Date.now()}`)
+    next();
 };
 // console.log(path.join(__dirname,'./favicon.png'))
 // Middlewares
 // app.use(favicon(__dirname + '/favicon.png'))
-app.use(favicon(__dirname+'./favicon.png'))
+app.use(favicon(__dirname + './favicon.png'))
 
 app.use(cors({
-  origin:"*"
+    origin: "*"
 }))
 
 app.use(logger);
@@ -49,12 +49,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-
-// Load Routes
+app.use(UserRoutes)
+    // Load Routes
 app.use(FoodRoutes);
 app.use(PersonRoutes);
-app.use(AuthRoutes)
+
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log("Server is running");
+    console.log("Server is running");
 });
